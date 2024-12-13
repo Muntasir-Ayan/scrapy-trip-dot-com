@@ -1,4 +1,4 @@
-# Scrapy settings for scrap_project project
+# Scrapy settings for scrapy_project project
 #
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
@@ -14,10 +14,10 @@ NEWSPIDER_MODULE = "scrap_project.spiders"
 
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = "scrap_project (+http://www.yourdomain.com)"
+#USER_AGENT = "scrapy_project (+http://www.yourdomain.com)"
 
 # Obey robots.txt rules
-ROBOTSTXT_OBEY = True
+ROBOTSTXT_OBEY = False
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 CONCURRENT_REQUESTS = 1
@@ -45,13 +45,13 @@ DOWNLOAD_DELAY = 3
 # Enable or disable spider middlewares
 # See https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 #SPIDER_MIDDLEWARES = {
-#    "scrap_project.middlewares.ScrapProjectSpiderMiddleware": 543,
+#    "scrapy_project.middlewares.ScrapyProjectSpiderMiddleware": 543,
 #}
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #DOWNLOADER_MIDDLEWARES = {
-#    "scrap_project.middlewares.ScrapProjectDownloaderMiddleware": 543,
+#    "scrapy_project.middlewares.ScrapyProjectDownloaderMiddleware": 543,
 #}
 
 # Enable or disable extensions
@@ -63,7 +63,7 @@ DOWNLOAD_DELAY = 3
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 #ITEM_PIPELINES = {
-#    "scrap_project.pipelines.ScrapProjectPipeline": 300,
+#    "scrapy_project.pipelines.ScrapyProjectPipeline": 300,
 #}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
@@ -90,3 +90,15 @@ DOWNLOAD_DELAY = 3
 # Set settings whose default value is deprecated to a future-proof value
 TWISTED_REACTOR = "twisted.internet.asyncioreactor.AsyncioSelectorReactor"
 FEED_EXPORT_ENCODING = "utf-8"
+
+
+ITEM_PIPELINES = {
+   'scrap_project.pipelines.PostgresPipeline': 1,
+}
+
+# Database settings (in pipeline)
+POSTGRES_HOST = 'postgres'
+POSTGRES_PORT = '5432'
+POSTGRES_DBNAME = 'scrapydb'
+POSTGRES_USER = 'user'
+POSTGRES_PASSWORD = 'password'

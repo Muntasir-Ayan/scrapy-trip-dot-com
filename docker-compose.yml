@@ -1,0 +1,31 @@
+version: '3'
+
+services:
+  postgres:
+    image: postgres:13
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: scrapydb
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - scrapy-network
+
+  scrapy:
+    build: .
+    depends_on:
+      - postgres
+    volumes:
+      - ./images:/app/images  # Mount the images directory
+    networks:
+      - scrapy-network
+
+volumes:
+  postgres-data:
+
+networks:
+  scrapy-network:
+    driver: bridge
