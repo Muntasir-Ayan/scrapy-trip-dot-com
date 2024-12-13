@@ -1,6 +1,7 @@
 import scrapy
 import json
 import re
+import random
 
 class ScraperSpider(scrapy.Spider):
     name = "dynamic_main_city_data"
@@ -20,15 +21,17 @@ class ScraperSpider(scrapy.Spider):
                     json_string = match.group(1)  # Extract JSON-like string
                     data = json.loads(json_string)  # Parse JSON string into Python dictionary
 
+                    
                     # Extract `htlsData` information
                     htls_data = data.get("initData", {}).get("htlsData", {})
                     if htls_data:
                         # Extract inboundCities from `htlsData`
-                        inbound_cities = htls_data.get('inboundCities', [])
+                        inside_outside = ['inboundCities','outboundCities']
+                        inbound_cities = htls_data.get(random.choice(inside_outside), [])
                         if inbound_cities:
                             self.logger.info(f'Found {len(inbound_cities)} inbound cities.')
                             # Process the first city for now
-                            city = inbound_cities[0]  # Select the first city
+                            city = random.choice(inbound_cities)  # Select the first city
                             city_id = city.get("id")
                             city_url = f"https://uk.trip.com/hotels/list?city={city_id}"
 
@@ -80,6 +83,7 @@ class ScraperSpider(scrapy.Spider):
 
                         yield {
                             "city_id": city.get("id"),
+                            "hotel_id": hotel_basic_info.get("hotelId"),
                             "city_name": city.get("name"),
                             "hotel_name": hotel_basic_info.get("hotelName"),
                             "price": hotel_basic_info.get("price"),
