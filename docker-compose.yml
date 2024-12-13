@@ -19,9 +19,12 @@ services:
     depends_on:
       - postgres
     volumes:
-      - ./images:/app/images  # Mount the images directory
+      - ./images:/app/images  # Mount local directory to container
     networks:
       - scrapy-network
+    environment:
+      IMAGES_DIR: "/app/images"  # Image storage directory
+      DATABASE_URL: "postgresql://user:password@postgres/scrapydb"
 
 volumes:
   postgres-data:

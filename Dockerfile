@@ -12,4 +12,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . /app/
 
 # Set the default command to run Scrapy crawl
-CMD ["scrapy", "crawl", "scraper"]
+CMD ["scrapy", "crawl", "dynamic_main_city_data"]

@@ -4,28 +4,6 @@ import re
 import random
 import os
 import requests
-from sqlalchemy import create_engine, Column, Integer, String
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
-
-# SQLAlchemy setup
-Base = declarative_base()
-
-class Product(Base):
-    __tablename__ = 'products'
-
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    city_id = Column(Integer)
-    hotel_id = Column(Integer)
-    city_name = Column(String)
-    title = Column(String)
-    price = Column(String)
-    rating = Column(String)
-    room_type = Column(String)
-    location = Column(String)
-    latitude = Column(String)
-    longitude = Column(String)
-    image = Column(String)
 
 class ScraperSpider(scrapy.Spider):
     name = "dynamic_main_city_data"
@@ -83,16 +61,6 @@ class ScraperSpider(scrapy.Spider):
                             room_info = hotel.get("roomInfo", {})
                             position_info = hotel.get("positionInfo", {})
 
-                            img_url = hotel_basic_info.get("hotelImg")
-                            img_name = os.path.basename(img_url)
-                            img_path = os.path.join('images', img_name)
-
-                            # Download and save the image locally
-                            if img_url:
-                                img_data = requests.get(img_url).content
-                                with open(img_path, 'wb') as f:
-                                    f.write(img_data)
-
                             yield {
                                 "city_id": city.get("id"),
                                 "hotel_id": hotel_basic_info.get("hotelId"),
@@ -104,8 +72,9 @@ class ScraperSpider(scrapy.Spider):
                                 "Location": position_info.get("positionName"),
                                 "latitude": position_info.get("coordinate", {}).get("lat"),
                                 "longitude": position_info.get("coordinate", {}).get("lng"),
-                                "image": img_name,  # Store the image file name in the database
+                                "image": hotel_basic_info.get("hotelImg"),
                             }
+                            self.logger.info(f"Extracted hotel data: {hotel_basic_info.get('hotelName')}")
                     else:
                         self.logger.error("No 'hotelList' found in 'firstPageList'.")
                 except Exception as e:

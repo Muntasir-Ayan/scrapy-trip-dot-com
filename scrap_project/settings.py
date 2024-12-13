@@ -17,7 +17,7 @@ NEWSPIDER_MODULE = "scrap_project.spiders"
 #USER_AGENT = "scrapy_project (+http://www.yourdomain.com)"
 
 # Obey robots.txt rules
-ROBOTSTXT_OBEY = False
+ROBOTSTXT_OBEY = True
 
 # Configure maximum concurrent requests performed by Scrapy (default: 16)
 CONCURRENT_REQUESTS = 1
@@ -90,6 +90,9 @@ DOWNLOAD_DELAY = 3
 # Set settings whose default value is deprecated to a future-proof value
 TWISTED_REACTOR = "twisted.internet.asyncioreactor.AsyncioSelectorReactor"
 FEED_EXPORT_ENCODING = "utf-8"
+
+IMAGES_STORE = './images'  # Default directory for storing images
+DATABASE_URL = 'postgresql://user:password@postgres/scrapydb'
 
 
 ITEM_PIPELINES = {

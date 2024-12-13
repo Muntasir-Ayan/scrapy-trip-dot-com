@@ -5,3 +5,14 @@ window.IBU_HOTEL.initData.htlsData.inboundCities
 https://uk.trip.com/hotels/list?city=733
 
 window.IBU_HOTEL.initData.htlsData.firstPagelist.hotellist
+
+docker-compose up --build
+
+
+docker exec -it scrapy-trip-dot-com-postgres-1 bash
+
+psql -U user -d scrapydb
+
+SELECT * FROM hotels;
+
+DROP TABLE hotels;
