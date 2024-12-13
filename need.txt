@@ -1,0 +1,7 @@
+scrapy crawl dynamic_main_city_data  -O dynamic_main_city_data.json
+
+window.IBU_HOTEL.initData.htlsData.inboundCities
+
+https://uk.trip.com/hotels/list?city=733
+
+window.IBU_HOTEL.initData.htlsData.firstPagelist.hotellist
