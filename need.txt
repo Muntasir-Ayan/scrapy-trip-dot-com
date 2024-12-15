@@ -16,3 +16,5 @@ psql -U user -d scrapydb
 SELECT * FROM hotels;
 
 DROP TABLE hotels;
+
+pytest --cov=scrap_project --cov-report=term-missing --maxfail=1

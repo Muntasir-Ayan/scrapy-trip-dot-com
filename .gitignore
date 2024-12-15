@@ -1,2 +1,9 @@
 .venv
 venv
+__pycache__
+*.pyc
+.pytest_cache/
+.tox/
+.coverage
+htmlcov/
+images/
