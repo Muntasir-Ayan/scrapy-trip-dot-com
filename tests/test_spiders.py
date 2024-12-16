@@ -10,7 +10,7 @@ def test_parse(mocker):
         "initData": {
             "htlsData": {
                 "inboundCities": [{"id": 123, "name": "Test City"}],
-                "outboundCities": []
+                "outboundCities": [{"id": 123, "name": "Test City"}]
             }
         }
     };
