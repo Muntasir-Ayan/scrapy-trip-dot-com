@@ -57,6 +57,8 @@ cd scrapy-trip-dot-com
 ├── tests                              # Unit Tests
 │   ├── test_spiders.py
 │   ├── test_pipelines.py
+│   ├── test_middlewares.py
+│   ├── test_settings.py
 ├── images                             # Directory for Downloaded Images
 ├── requirements.txt                   # Dependencies List
 ├── README.md                          # Project Documentation
@@ -107,6 +109,9 @@ The PostgreSQL database uses the following schema:
 | Column        | Type       | Description                      |
 |---------------|------------|----------------------------------|
 | id            | Integer    | Primary Key                     |
+| city_id       | Integer    | City Id                         |
+| hotel_id      | Integer    | Hotel Id                        |
+| city_name     | String     | City name                       |
 | title         | String     | Property Title                  |
 | rating        | Float      | Property Rating                 |
 | location      | String     | Property Location               |
@@ -114,7 +119,7 @@ The PostgreSQL database uses the following schema:
 | longitude     | Float      | Longitude                       |
 | room_type     | String     | Room Type                       |
 | price         | String     | Property Price                  |
-| image_path    | String     | Path to Stored Image            |
+| image         | String     | Path to Stored Image            |
 
 ---
 ## Docker Encounter Issue
