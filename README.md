@@ -121,6 +121,7 @@ The PostgreSQL database uses the following schema:
 If you face any docker encounter issue, Use:
 ```bash
 docker-compose build --no-cache
+docker-compose up
 ```
 
 
