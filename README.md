@@ -80,6 +80,12 @@ Use Docker, Ensure Docker is running.
 ```bash
 docker-compose up --build
 ```
+
+If you face any docker encounter issue, Use this instead of that:
+```bash
+docker-compose build --no-cache
+docker-compose up
+```
 To Stop docker
 ```bash
 docker-compose down
@@ -122,12 +128,7 @@ The PostgreSQL database uses the following schema:
 | image         | String     | Path to Stored Image            |
 
 ---
-## Docker Encounter Issue
-If you face any docker encounter issue, Use:
-```bash
-docker-compose build --no-cache
-docker-compose up
-```
+
 
 
 ## Contributing
