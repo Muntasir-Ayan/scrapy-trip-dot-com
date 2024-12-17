@@ -117,6 +117,12 @@ The PostgreSQL database uses the following schema:
 | image_path    | String     | Path to Stored Image            |
 
 ---
+## Docker Encounter Issue
+If you face any docker encounter issue, Use:
+```bash
+docker-compose build --no-cache
+```
+
 
 ## Contributing
 
@@ -133,25 +139,3 @@ This project is licensed under the MIT License. See the LICENSE file for more de
 ## Contact
 
 For any inquiries or feedback, feel free to contact [Muntasir Ayan](mailto:mjayan439@gmail.com).
-
-
-
-### 3. Configure PostgreSQL Database
-Use Docker to set up a PostgreSQL database:
-```bash
-docker run --name trip_db -e POSTGRES_USER=admin -e POSTGRES_PASSWORD=admin -e POSTGRES_DB=tripdb -p 5432:5432 -d postgres
-```
-
-Update `settings.py` with the database connection URL:
-```python
-DATABASE_URL = "postgresql+psycopg2://admin:admin@localhost:5432/tripdb"
-```
-
-### 4. Run the Spider
-To scrape data from Trip.com, run the spider:
-```bash
-scrapy crawl trip_spider
-```
-
-### 5. Check Database
-Verify that the data has been stored in the PostgreSQL database. Use any PostgreSQL client, such as `psql` or `PgAdmin`.
