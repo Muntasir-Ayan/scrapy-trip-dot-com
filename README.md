@@ -5,7 +5,7 @@ A Scrapy-based web scraper that gathers property information from Trip.com, proc
 - Extracts property data such as title, rating, location, latitude, longitude, room type, price, and images.
 - Stores images in a directory and references them in a PostgreSQL database.
 - Automatically creates database tables and directories.
-- Includes unit tests with 60% code coverage.
+- Includes unit tests with 80% code coverage.
 
 ---
 
@@ -40,45 +40,9 @@ A Scrapy-based web scraper that gathers property information from Trip.com, proc
 
 ### 1. Clone the Repository
 ```bash
-git clone <repository-url>
+git clone https://github.com/Muntasir-Ayan/scrapy-trip-dot-com.git
 cd scrapy-trip-dot-com
 ```
-
-### 2. Install Dependencies
-Create a virtual environment and install the required Python libraries:
-```bash
-python -m venv .venv
-source .venv/bin/activate  # On Windows, use .venv\Scripts\activate
-pip install -r requirements.txt
-```
-
-### 3. Configure PostgreSQL Database
-Use Docker to set up a PostgreSQL database:
-```bash
-docker run --name trip_db -e POSTGRES_USER=admin -e POSTGRES_PASSWORD=admin -e POSTGRES_DB=tripdb -p 5432:5432 -d postgres
-```
-
-Update `settings.py` with the database connection URL:
-```python
-DATABASE_URL = "postgresql+psycopg2://admin:admin@localhost:5432/tripdb"
-```
-
-### 4. Run the Spider
-To scrape data from Trip.com, run the spider:
-```bash
-scrapy crawl trip_spider
-```
-
-### 5. Check Database
-Verify that the data has been stored in the PostgreSQL database. Use any PostgreSQL client, such as `psql` or `PgAdmin`.
-
-### 6. Run Tests
-To execute unit tests and check code coverage:
-```bash
-pytest --cov=scrap_project --cov-report=term-missing
-```
-
----
 
 ## Project Structure
 
@@ -97,6 +61,40 @@ pytest --cov=scrap_project --cov-report=term-missing
 ├── requirements.txt                   # Dependencies List
 ├── README.md                          # Project Documentation
 └── Dockerfile                         # Docker Configuration
+```
+
+---
+
+### 2. Install Dependencies
+Create a virtual environment and install the required Python libraries:
+```bash
+python -m venv .venv
+source .venv/bin/activate  # On Windows, use .venv\Scripts\activate
+pip install -r requirements.txt
+```
+
+### 3. Desktop
+Use Docker, Ensure Docker is running.
+```bash
+docker-compose up --build
+```
+To Stop docker
+```bash
+docker-compose down
+```
+### 4. Check Database 
+Open new terminal (Docker should running)
+```bash
+docker exec -it scrapy-trip-dot-com-postgres-1 bash
+psql -U user -d scrapydb
+SELECT * FROM hotels;
+```
+
+
+### 6. Run Tests
+To execute unit tests and check code coverage:
+```bash
+pytest --cov=scrap_project --cov-report=term-missing
 ```
 
 ---
@@ -135,3 +133,25 @@ This project is licensed under the MIT License. See the LICENSE file for more de
 ## Contact
 
 For any inquiries or feedback, feel free to contact [Muntasir Ayan](mailto:mjayan439@gmail.com).
+
+
+
+### 3. Configure PostgreSQL Database
+Use Docker to set up a PostgreSQL database:
+```bash
+docker run --name trip_db -e POSTGRES_USER=admin -e POSTGRES_PASSWORD=admin -e POSTGRES_DB=tripdb -p 5432:5432 -d postgres
+```
+
+Update `settings.py` with the database connection URL:
+```python
+DATABASE_URL = "postgresql+psycopg2://admin:admin@localhost:5432/tripdb"
+```
+
+### 4. Run the Spider
+To scrape data from Trip.com, run the spider:
+```bash
+scrapy crawl trip_spider
+```
+
+### 5. Check Database
+Verify that the data has been stored in the PostgreSQL database. Use any PostgreSQL client, such as `psql` or `PgAdmin`.
