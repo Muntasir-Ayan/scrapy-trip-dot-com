@@ -11,6 +11,8 @@ docker-compose up --build
 
 docker exec -it scrapy-trip-dot-com-postgres-1 bash
 
+docker exec -it scrap_project-postgres-1 bash
+
 psql -U user -d scrapydb
 
 SELECT * FROM hotels;
